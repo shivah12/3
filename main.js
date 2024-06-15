@@ -1,113 +1,108 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 
-// Loading textures
-const textureLoader = new THREE.TextureLoader();
-const normalTexture = textureLoader.load('/assets/textures/NormalMap.png');
+document.addEventListener('DOMContentLoaded', () => {
+    const isPhoneScreen = window.innerWidth <= 768;
 
-// Canvas
-const canvas = document.querySelector('.webgl');
+    const smallSphere = document.querySelector('.small-sphere');
+    const navLinks = document.querySelector('.nav__links');
 
-// Scene
-const scene = new THREE.Scene();
+    if (smallSphere) {
+        smallSphere.addEventListener('click', () => {
+            if (isPhoneScreen) {
+                navLinks.classList.toggle('active');
+            }
+        });
+    }
 
-// Objects
-const geometry = new THREE.SphereBufferGeometry(0.5, 64, 64);
+    const textureLoader = new THREE.TextureLoader();
+    const normalTexture = textureLoader.load('/assets/textures/NormalMap.png');
 
-// Materials
-const material = new THREE.MeshStandardMaterial();
-material.metalness = 0.7;
-material.roughness = 0.2;
-material.normalMap = normalTexture;
-material.color = new THREE.Color();
+    const canvas = document.querySelector('.webgl');
+    const scene = new THREE.Scene();
 
-// Mesh
-const sphere = new THREE.Mesh(geometry, material);
-scene.add(sphere);
+    const geometry = new THREE.SphereBufferGeometry(0.5, 64, 64);
+    const material = new THREE.MeshStandardMaterial({
+        metalness: 0.7,
+        roughness: 0.2,
+        normalMap: normalTexture,
+        color: new THREE.Color()
+    });
 
-// Lights
-const pointLight = new THREE.PointLight(0xffffff, 0.1);
-pointLight.position.set(2, 3, 4);
-scene.add(pointLight);
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
 
-const pointLight2 = new THREE.PointLight(0x0e1f0, 2);
-pointLight2.position.set(-1.86, 1.33, -0.66);
-pointLight2.intensity = 7;
-scene.add(pointLight2);
+    const pointLight = new THREE.PointLight(0xffffff, 0.1);
+    pointLight.position.set(2, 3, 4);
+    scene.add(pointLight);
 
-const pointLight3 = new THREE.PointLight(0xe11212, 0.1);
-pointLight3.position.set(2.13, -1.31, -0.92);
-pointLight3.intensity = 4.28;
-scene.add(pointLight3);
+    const pointLight2 = new THREE.PointLight(0x0e1f0, 2);
+    pointLight2.position.set(-1.86, 1.33, -0.66);
+    pointLight2.intensity = 7;
+    scene.add(pointLight2);
 
-// Sizes
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight,
-};
+    const pointLight3 = new THREE.PointLight(0xe11212, 0.1);
+    pointLight3.position.set(2.13, -1.31, -0.92);
+    pointLight3.intensity = 4.28;
+    scene.add(pointLight3);
 
-window.addEventListener('resize', () => {
-    // Update sizes
-    sizes.width = window.innerWidth;
-    sizes.height = window.innerHeight;
+    const sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
 
-    // Update camera
-    camera.aspect = sizes.width / sizes.height;
-    camera.updateProjectionMatrix();
+    window.addEventListener('resize', () => {
+        sizes.width = window.innerWidth;
+        sizes.height = window.innerHeight;
 
-    // Update renderer
+        camera.aspect = sizes.width / sizes.height;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(sizes.width, sizes.height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    });
+
+    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+    camera.position.set(0, 0, 2);
+    scene.add(camera);
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    document.addEventListener('mousemove', onDocumentMouseMove);
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    const windowHalfX = window.innerWidth / 2;
+    const windowHalfY = window.innerHeight / 2;
+
+    function onDocumentMouseMove(event) {
+        mouseX = (event.clientX - windowHalfX);
+        mouseY = (event.clientY - windowHalfY);
+    }
+
+    document.addEventListener('scroll', updateSphere);
+    function updateSphere() {
+        sphere.position.y = window.scrollY * 0.005;
+    }
+
+    const clock = new THREE.Clock();
+
+    const tick = () => {
+        targetX = mouseX * 0.001;
+        targetY = mouseY * 0.001;
+
+        const elapsedTime = clock.getElapsedTime();
+
+        sphere.rotation.y = 0.5 * elapsedTime;
+        sphere.rotation.y += 0.5 * (targetX - sphere.rotation.y);
+        sphere.rotation.x += 0.5 * (targetY - sphere.rotation.x);
+
+        renderer.render(scene, camera);
+
+        window.requestAnimationFrame(tick);
+    };
+
+    tick();
 });
-
-// Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-camera.position.set(0, 0, 2);
-scene.add(camera);
-
-// Renderer
-const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
-renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-// Mouse move event
-document.addEventListener('mousemove', onDocumentMouseMove);
-let mouseX = 0;
-let mouseY = 0;
-let targetX = 0;
-let targetY = 0;
-const windowHalfX = window.innerWidth / 2;
-const windowHalfY = window.innerHeight / 2;
-
-function onDocumentMouseMove(event) {
-    mouseX = (event.clientX - windowHalfX);
-    mouseY = (event.clientY - windowHalfY);
-}
-
-// Scroll event
-document.addEventListener('scroll', updateSphere);
-function updateSphere() {
-    sphere.position.y = window.scrollY * 0.005;
-}
-
-// Animation
-const clock = new THREE.Clock();
-
-const tick = () => {
-    targetX = mouseX * 0.001;
-    targetY = mouseY * 0.001;
-
-    const elapsedTime = clock.getElapsedTime();
-
-    // Update objects
-    sphere.rotation.y = 0.5 * elapsedTime;
-    sphere.rotation.y += 0.5 * (targetX - sphere.rotation.y);
-    sphere.rotation.x += 0.5 * (targetY - sphere.rotation.x);
-
-    // Update renderer
-    renderer.render(scene, camera);
-
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick);
-};
-
-tick();
