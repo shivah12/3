@@ -32,7 +32,7 @@ nav {
 .nav__logo a {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #fff4f4;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -77,17 +77,159 @@ nav {
 
 h1 {
     font-size: 8rem;
-    margin-top: 40%;
-    margin-right: 30%;
+    margin-top: 48%;
+    margin-right: 40%;
     text-transform: uppercase;
     color: white;
     font-family: 'Montserrat', sans-serif;
 }
 
+.content-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50%; /* Increased margin to avoid overlap */
+}
+
+.card {
+    width: 300px;
+    height: 254px;
+    background: #302f2f;
+    overflow: hidden;
+    display: flex;
+    margin-right: 2rem;
+    border-radius: 10px;
+    padding: 15px;
+}
+  
+.circles,
+.browser {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    
+}
+  
+.circles {
+    width: 20%;
+    gap: 8px;
+    padding: 10px;
+}
+  
+.c {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 5px rgba(255, 240, 240, 0.356);
+}
+  
+.c:first-child {
+    background-color: red;
+}
+  
+.c:nth-child(2) {
+    background-color: rgb(204, 167, 4);
+}
+  
+.c:last-child {
+    background-color: green;
+}
+  
+.browser {
+    width: 80%;
+    padding: 5px;
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+  
+.chevrons {
+    display: flex;
+    color: #302a2a;
+}
+  
+.search-bar {
+    position: relative;
+    border: 0.5px solid rgb(246, 245, 245);
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: rgb(88, 88, 88);
+    box-shadow: inset 2px 2px 2px #918c8c25;
+}
+  
+.search-bar svg {
+    position: absolute;
+    left: 10px;
+}
+
+.container1 {
+    text-align: left; /* Ensure text in this container is right-aligned */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+h2 {
+    font-size: 6rem;
+    margin-top: 0;
+    text-align: right; /* Right-align the text */
+    text-transform: uppercase;
+    color: whitesmoke;
+    margin-left: 65%;
+}
+
+h5 {
+    font-size: 1.5rem;
+    text-align: right; /* Right-align the text */
+    text-transform: uppercase;
+    color: whitesmoke;
+    margin-left: 30%;
+}
+
 section {
     height: 100vh;
 }
+.footer {
+    background-color: rgb(24, 24, 24);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
 
+.footer-content {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.footer-links li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links li a:hover {
+    color: #ccc;
+}
 @media (max-width: 768px) {
     h1 {
         font-size: 4rem;
@@ -103,5 +245,18 @@ section {
     
     .container {
         height: auto;
+    }
+
+    .content-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        margin-bottom: 2rem;
+        margin-right: 0;
+    }
+    .footer {
+                font-size: 14px;
     }
 }
