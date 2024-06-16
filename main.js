@@ -1,18 +1,7 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const isPhoneScreen = window.innerWidth <= 768;
-
-    const smallSphere = document.querySelector('.small-sphere');
-    const navLinks = document.querySelector('.nav__links');
-
-    if (smallSphere) {
-        smallSphere.addEventListener('click', () => {
-            if (isPhoneScreen) {
-                navLinks.classList.toggle('active');
-            }
-        });
-    }
+    
 
     const textureLoader = new THREE.TextureLoader();
     const normalTexture = textureLoader.load('/assets/textures/NormalMap.png');
@@ -68,6 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Apply linear gradient from teal to black (top to bottom) with reduced teal opacity
+    renderer.domElement.style.background = `
+        linear-gradient(
+            to bottom,
+            rgba(0, 128, 128, 0.5) 0%, /* Adjusted opacity for teal */
+            rgba(0, 0, 0, 0.8) 100%
+        )`;
 
     document.addEventListener('mousemove', onDocumentMouseMove);
     let mouseX = 0;
