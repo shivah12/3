@@ -266,9 +266,10 @@ section {
         align-items: center;
     }
 
-    .card {
+     .card {
         margin-bottom: 2rem;
         background: #302f2f;
+        width: 280px;
     }
 
     .footer {
