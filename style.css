@@ -424,12 +424,18 @@ section {
         padding: 20px;
     }
     h3{
-        font-size: 5rem;
+        font-size: 4.5rem;
         padding: 10px;
     }
     h5{
         font-size: 1.5rem;
         margin-left: 55%;
+        padding: 20px;
+    }
+    h7{
+        font-size: 5rem;
+        margin-top: 150%;
+        margin-right: 30%;
         padding: 20px;
     }
     .nav__links {
