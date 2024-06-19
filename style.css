@@ -420,7 +420,7 @@ section {
 
     h2 {
         font-size: 4.5rem;
-        margin-left: 45%;
+        margin-left: 25%;
         padding: 20px;
     }
     h3{
@@ -464,6 +464,10 @@ section {
         margin-bottom: 2rem;
         background: #626161;
         width: 270px;
+    }
+    .card1{
+         max-width: 100px;
+        margin-left: 25%;
     }
 
     .footer {
