@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -321,6 +322,10 @@ section {
     .container1 {
         height: auto;
     }
+    .container3 {
+        height: auto;
+        margin-top: 40%;
+    }
 
     .content-row {
         flex-direction: column;
@@ -329,7 +334,7 @@ section {
 
     .card {
         margin-bottom: 2rem;
-        background: #454545;
+        background: #626161;
         width: 270px;
     }
 
