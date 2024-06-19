@@ -247,7 +247,11 @@ section {
         margin-left: 35%;
         padding: 20px;
     }
-
+    h5{
+        font-size: 1.5rem;
+        margin-left: 35%;
+        padding: 20px;
+    }
     .nav__links {
         font-size: 0.8rem;
         gap: 0px;
@@ -266,10 +270,10 @@ section {
         align-items: center;
     }
 
-     .card {
+    .card {
         margin-bottom: 2rem;
-        background: #302f2f;
-        width: 280px;
+        background: #454545;
+        width: 270px;
     }
 
     .footer {
