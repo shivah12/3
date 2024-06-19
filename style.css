@@ -466,8 +466,9 @@ section {
         width: 270px;
     }
     .card1{
+         margin-top: 10%;
          max-width: 300px;
-        margin-left: 10%;
+         margin-left: 10%;
     }
 
     .footer {
